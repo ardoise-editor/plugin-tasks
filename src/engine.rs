@@ -1,5 +1,5 @@
 //! Tasks of a project (build, test, run…): found in its files or written
-//! by hand in `.simpleedit/tasks.json`, run with their output streamed, and
+//! by hand in `.ardoise/tasks.json`, run with their output streamed, and
 //! the places an output names (`src/a.rs:12:5`) found in it.
 
 use std::path::{Path, PathBuf};
@@ -68,11 +68,11 @@ fn make_targets(text: &str) -> Vec<String> {
 }
 
 /// The tasks of the project at `root`: the ones written in
-/// `.simpleedit/tasks.json` (`[{"name", "command", "cwd"}]`) first, then
+/// `.ardoise/tasks.json` (`[{"name", "command", "cwd"}]`) first, then
 /// those its files imply (Cargo, npm scripts, Make, Go).
 pub fn detect(root: &Path) -> Vec<TaskSpec> {
     let mut tasks = Vec::new();
-    if let Ok(raw) = std::fs::read_to_string(root.join(".simpleedit").join("tasks.json")) {
+    if let Ok(raw) = std::fs::read_to_string(root.join(".ardoise").join("tasks.json")) {
         if let Ok(list) = serde_json::from_str::<Vec<serde_json::Value>>(&raw) {
             for item in list {
                 let (Some(name), Some(command)) = (item["name"].as_str(), item["command"].as_str())
@@ -240,9 +240,9 @@ mod tests {
             "CC := gcc\n.PHONY: all\nall: a.o\n\tcc\nclean:\n\trm\n%.o: %.c\n\tcc\ninstall test: all\n",
         )
         .unwrap();
-        std::fs::create_dir(root.join(".simpleedit")).unwrap();
+        std::fs::create_dir(root.join(".ardoise")).unwrap();
         std::fs::write(
-            root.join(".simpleedit/tasks.json"),
+            root.join(".ardoise/tasks.json"),
             r#"[{"name": "serve", "command": "python -m http.server", "cwd": "web"}, {"name": "no command"}]"#,
         )
         .unwrap();

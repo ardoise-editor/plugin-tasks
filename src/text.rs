@@ -8,8 +8,8 @@ pub fn t(french: bool, key: &str) -> &'static str {
         "rerun" => ("Run again", "Relancer"),
         "clear" => ("Clear", "Effacer"),
         "none" => (
-            "No task in this project (Cargo, npm, Make, Go or .simpleedit/tasks.json)",
-            "Aucune tâche dans ce projet (Cargo, npm, Make, Go ou .simpleedit/tasks.json)",
+            "No task in this project (Cargo, npm, Make, Go or .ardoise/tasks.json)",
+            "Aucune tâche dans ce projet (Cargo, npm, Make, Go ou .ardoise/tasks.json)",
         ),
         "running" => ("Running…", "En cours…"),
         "ok" => ("Done", "Terminé"),

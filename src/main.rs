@@ -1,5 +1,5 @@
 //! The Tasks plugin of Ardoise: the build, test and run commands of a
-//! project (Cargo, npm scripts, Make, Go, `.simpleedit/tasks.json`), run with
+//! project (Cargo, npm scripts, Make, Go, `.ardoise/tasks.json`), run with
 //! their output in a panel, the places it names a click away and its errors
 //! shown in the files.
 
@@ -13,10 +13,10 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
 
-use simpleedit_plugin::lint::Diagnostic;
-use simpleedit_plugin::protocol::{Context, InitializeParams, Settings, UiEvent};
-use simpleedit_plugin::ui::*;
-use simpleedit_plugin::{run, Host, Plugin};
+use ardoise_plugin::lint::Diagnostic;
+use ardoise_plugin::protocol::{Context, InitializeParams, Settings, UiEvent};
+use ardoise_plugin::ui::*;
+use ardoise_plugin::{run, Host, Plugin};
 
 use engine::{Event, Location, TaskSpec};
 use text::t;
@@ -79,7 +79,7 @@ const PROJECT_MARKERS: &[&str] = &[
     "Makefile",
     "makefile",
     "GNUmakefile",
-    ".simpleedit",
+    ".ardoise",
 ];
 
 /// The nearest folder above a file that looks like a project.
@@ -257,7 +257,7 @@ impl Tasks {
         let question = format!(
             "{} {}",
             t(french, "trust"),
-            root.join(".simpleedit/tasks.json").display()
+            root.join(".ardoise/tasks.json").display()
         );
         if !host.confirm(question).unwrap_or(false) {
             return false;

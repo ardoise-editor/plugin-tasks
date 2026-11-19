@@ -1,6 +1,6 @@
 //! The problems an output says: an error or a warning at a place.
 
-use simpleedit_plugin::lint::{Diagnostic, Severity};
+use ardoise_plugin::lint::{Diagnostic, Severity};
 
 use crate::engine::Location;
 

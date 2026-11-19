@@ -1,6 +1,6 @@
 # Tasks — an Ardoise Editor plugin
 
-The build, test and run commands of a project (Cargo, npm scripts, Make, Go, and `.simpleedit/tasks.json`: `[{"name", "command", "cwd"}]`), run from a panel of [Ardoise Editor](https://github.com/ardoise-editor/ardoise) with their output. A place the output names (`src/a.rs:12:5`) opens the file there; errors and warnings show in their files. The commands a project writes itself run once you allow it.
+The build, test and run commands of a project (Cargo, npm scripts, Make, Go, and `.ardoise/tasks.json`: `[{"name", "command", "cwd"}]`), run from a panel of [Ardoise Editor](https://github.com/ardoise-editor/ardoise) with their output. A place the output names (`src/a.rs:12:5`) opens the file there; errors and warnings show in their files. The commands a project writes itself run once you allow it.
 
 ## Build
 

@@ -12,6 +12,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "ardoise-plugin"
+version = "0.12.0"
+dependencies = [
+ "serde",
+ "serde_json",
+]
+
+[[package]]
+name = "ardoise-tasks"
+version = "1.0.1"
+dependencies = [
+ "ardoise-plugin",
+ "libc",
+ "regex",
+ "serde_json",
+ "tempfile",
+]
+
+[[package]]
 name = "bitflags"
 version = "2.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -187,26 +206,6 @@ dependencies = [
  "serde",
  "serde_core",
  "zmij",
-]
-
-[[package]]
-name = "simpleedit-plugin"
-version = "0.4.2"
-source = "git+https://github.com/simple-edit-app/plugin-sdk?tag=v0.4.2#9fa273e5a3c202978bc45634794c4c30c1a6eade"
-dependencies = [
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "simpleedit-tasks"
-version = "1.0.1"
-dependencies = [
- "libc",
- "regex",
- "serde_json",
- "simpleedit-plugin",
- "tempfile",
 ]
 
 [[package]]
