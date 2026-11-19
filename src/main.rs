@@ -1,4 +1,4 @@
-//! The Tasks plugin of SimpleEdit: the build, test and run commands of a
+//! The Tasks plugin of Ardoise: the build, test and run commands of a
 //! project (Cargo, npm scripts, Make, Go, `.simpleedit/tasks.json`), run with
 //! their output in a panel, the places it names a click away and its errors
 //! shown in the files.
