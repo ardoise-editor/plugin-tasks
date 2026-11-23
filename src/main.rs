@@ -153,7 +153,10 @@ impl State {
                 .button_style(ButtonStyle::Danger)
                 .enabled(running),
             button(t(f, "rerun"), "rerun").enabled(self.task.is_some() && !running),
-            button(t(f, "clear"), "clear").button_style(ButtonStyle::Ghost),
+            button(t(f, "clear"), "clear")
+                .button_style(ButtonStyle::Ghost)
+                // Nothing to clear until something was printed.
+                .enabled(!self.lines.is_empty()),
         ];
         let state = self.state_text();
         if !state.is_empty() {
@@ -446,6 +449,35 @@ fn main() -> std::io::Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Whether the button with this action is on, in what the panel shows.
+    fn button_on(state: &State, action: &str) -> bool {
+        let page = serde_json::to_value(state.view()).unwrap();
+        fn find(v: &serde_json::Value, action: &str) -> Option<bool> {
+            if v["action"] == action {
+                return Some(v.get("enabled").and_then(|e| e.as_bool()).unwrap_or(true));
+            }
+            match v {
+                serde_json::Value::Object(m) => m.values().find_map(|c| find(c, action)),
+                serde_json::Value::Array(a) => a.iter().find_map(|c| find(c, action)),
+                _ => None,
+            }
+        }
+        find(&page, action).expect(action)
+    }
+
+    #[test]
+    fn nothing_can_be_run_stopped_rerun_or_cleared_before_there_is_something_to() {
+        let mut s = State::default();
+        for action in ["run", "stop", "rerun", "clear"] {
+            assert!(!button_on(&s, action), "{action} is off at the start");
+        }
+        // Something printed: it can be cleared again, and no more after.
+        s.add_lines(vec!["hello".into()]);
+        assert!(button_on(&s, "clear"));
+        s.lines.clear();
+        assert!(!button_on(&s, "clear"));
+    }
 
     #[test]
     fn output_lines_keep_their_places_and_problems() {
