@@ -1,7 +1,7 @@
 {
   "id": "ardoise.tasks",
   "name": { "en": "Tasks", "fr": "Tâches" },
-  "version": "1.0.2",
+  "version": "1.0.3",
   "api": 1,
   "description": {
     "en": "Build, test and run the commands of a project (Cargo, npm, Make, Go, tasks.json) with their output and errors",
